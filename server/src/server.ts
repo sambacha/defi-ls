@@ -159,6 +159,8 @@ interface DefiSettings {
 	maxNumberOfProblems: number;
 	infuraProjectId: string;
 	infuraProjectSecret: string;
+	// TODO: AlchemyAPI 
+	alchemyApiKey: string;
 	amberdataApiKey: string;
 	etherscanApiKey: string;
 	cacheDuration: number;
@@ -168,7 +170,9 @@ interface DefiSettings {
 // The global settings, used when the `workspace/configuration` request is not supported by the client.
 // Please note that this is not the case when using this server with the client provided in this example
 // but could happen with other clients.
-const defaultSettings: DefiSettings = { maxNumberOfProblems: 100, infuraProjectId: "", infuraProjectSecret: "", amberdataApiKey: "", etherscanApiKey: "", cacheDuration: 60000, tokenListJsonUrl: DEFAULT_TOKEN_LIST_JSON_URL };
+// TODO: AlchemyAPI 
+// alchemyApiKey: "",
+const defaultSettings: DefiSettings = { maxNumberOfProblems: 100, infuraProjectId: "", infuraProjectSecret: "", alchemyApiKey: "", amberdataApiKey: "", etherscanApiKey: "", cacheDuration: 60000, tokenListJsonUrl: DEFAULT_TOKEN_LIST_JSON_URL };
 let globalSettings: DefiSettings = defaultSettings;
 
 // Cache the settings of all open documents
@@ -235,6 +239,21 @@ async function validateTextDocument(textDocument: TextDocument): Promise<void> {
 		connection.console.info("Using Infura for web3.");
 	}
 
+/**	
+
+TODO: AlchemyAPI Entrypoint 
+
+	if (settings.alchemyApiKey === "" || settings.alchemyApiKey === "") {
+		connection.console.warn("Alchmey API Key has not been set. Obtain them from https://alchemyapi.io/ and set them in the VS Code settings by searching for \"Alchemy\".");
+	} else {
+		// set up infura and ENS
+		web3provider = new Web3.providers.HttpProvider('https://:' + '@eth-mainnet.alchemyapi.io/v2' + settings.alchemyApiKey);
+		ens = new ENS(web3provider);
+		connection.console.info("Using Alchmey for web3.");
+	}
+	
+
+*/
 	if (settings.amberdataApiKey === "") {
 		connection.console.warn("Amberdata.io API key has not been set. Obtain one from https://amberdata.io/ and set the in them VS Code settings by searching for \"Amberdata\".");
 	} else {
